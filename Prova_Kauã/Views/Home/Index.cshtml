@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="form-control" style="margin: 0 auto;width: 50%;border-color:white">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="row">
+                    <div class="text-center">
+                        <img src="https://99prod.s3.amazonaws.com/uploads/f1350adc-bdfd-43bf-b210-78d1919cbcf5/Google.png">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <label style="fonte size:4px">Preencha o Login e a Senha, para logar no sistema.</label>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="fonte size:4px">Email ou Palavra-Chave:</label>
+                        <input id="login" class="form-control" placeholder="Insira a Palavra-Chave ou Email" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="fonte size:4px">Senha:</label>
+                        <input id="Senha" class="form-control" placeholder="Insira a sua Senha" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <p id="errado" class="text-center" style="color:red;display:none">Usúario ou Senha inválido!</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary" style="width:97%" onclick="acessar()" id="btnsalvar">Acessar</button>
+                </div>
+
+
+            </div>
+            <!--Modal-->
+            <div class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Verificar a senha</h5>
+                            <button type="button" onclick="closeModal()" class="close-button" aria-hidden="true">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="TextoModal"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="closeModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function acessar() {
+
+        let model = {
+            EMAIL: $("#login").val(),
+            SENHA: $("#Senha").val()
+        }
+        let teste = model.SENHA.length;
+        if (model.SENHA.length < 5) {
+            $('#TextoModal').html('A senha digitada possui {' + teste + '} caracteres!');
+            $('.modal').modal('show');
+        }
+        else {
+
+            $.ajax({
+                url: "../Home/Login",
+                method: "POST",
+                data: model,
+                success: function (data) {
+                    if (data == true) {
+                        window.location.href = "../kaua";
+                    }
+                    else {
+                        $("#errado").show();
+                    }
+
+                }
+            });
+        }
+
+    };
+    function closeModal() {
+        $('.modal').modal('hide');
+    }
+</script>

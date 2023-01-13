@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "kaua";
+}
+<link rel="stylesheet" href="~/css/kaua.css" asp-append-version="true" />
+
+<div class="form-control">
+    <div class="row">
+        <div class="row">
+            <h1>Hello</h1>
+        </div>
+        <div class="row">
+            <div class="prova">PROVA</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button id="btnsair" type="button"  class="btn btn-danger">Sair</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $("#btnsair").click(function(){
+        window.location.href = '../';
+    });
+</script>
+
+
+
